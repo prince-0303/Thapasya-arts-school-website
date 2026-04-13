@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Mail, Phone, MessageSquare, Send } from 'lucide-react';
 import { submitEnquiry } from '../api';
 
+// eslint-disable-next-line no-unused-vars
 const InputWrapper = ({ icon: Icon, children }) => (
   <div className="relative group">
     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -39,7 +40,8 @@ const EnquiryForm = () => {
       await submitEnquiry(formData);
       setStatus({ type: 'success', message: 'Your enquiry has been sent successfully! We will contact you soon.' });
       setFormData({ full_name: '', email: '', phone: '', message: '' }); // reset form
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       setStatus({ type: 'error', message: 'Failed to send your enquiry. Please verify your details or try again later.' });
     } finally {
       setIsSubmitting(false);

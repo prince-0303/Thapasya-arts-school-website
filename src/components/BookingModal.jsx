@@ -11,7 +11,6 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
     people_count: '',
     client_name: '',
     contact_phone: '',
-    budget_offered: '',
     description: ''
   });
   
@@ -31,7 +30,6 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
         people_count: '',
         client_name: '',
         contact_phone: '',
-        budget_offered: '',
         description: ''
       }));
       setSuccess(false);
@@ -83,7 +81,6 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
         people_count: parseInt(formData.people_count),
         client_name: formData.client_name,
         contact_phone: formData.contact_phone,
-        budget_offered: parseFloat(formData.budget_offered),
         description: formData.description
       };
 
@@ -145,18 +142,22 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
               <div className="space-y-3">
                 <label className="text-sm font-semibold text-gray-800 uppercase tracking-wider mb-2 block">1. Select Programs</label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {courses.map(course => {
+                  {courses
+                    .filter(course => initialCourseId ? course.id === initialCourseId : true)
+                    .map(course => {
                     const isSelected = formData.course_ids.includes(course.id);
                     return (
                       <button
                         type="button"
                         key={course.id}
-                        onClick={() => toggleCourse(course.id)}
+                        onClick={() => {
+                          if (!initialCourseId) toggleCourse(course.id);
+                        }}
                         className={`text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all duration-200 flex items-center justify-between group ${
                           isSelected 
                             ? 'bg-gray-900 border-gray-900 text-white shadow-md' 
                             : 'bg-white border-gray-200 text-gray-600 hover:border-gray-900 hover:text-gray-900'
-                        }`}
+                        } ${initialCourseId && 'cursor-default pointer-events-none'}`}
                       >
                         <span className="truncate pr-2">{course.name}</span>
                         <div className={`w-4 h-4 rounded-full border flex-shrink-0 flex items-center justify-center transition-colors ${isSelected ? 'border-primary bg-primary' : 'border-gray-300 group-hover:border-gray-500'}`}>
@@ -234,7 +235,7 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
 
               <div className="space-y-6">
                  <label className="text-sm font-semibold text-gray-800 uppercase tracking-wider block">3. Performance Scale</label>
-                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="relative group">
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 ml-1 group-focus-within:text-gray-900 transition-colors">Duration (Hrs)</label>
                     <input type="number" name="duration_hours" required min="0.5" step="0.5" value={formData.duration_hours} onChange={handleChange} 
@@ -243,17 +244,10 @@ const BookingModal = ({ isOpen, onClose, initialCourseId, courses }) => {
                     />
                   </div>
                   <div className="relative group">
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 ml-1 group-focus-within:text-gray-900 transition-colors">Audience Size</label>
+                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 ml-1 group-focus-within:text-gray-900 transition-colors">Participants Count</label>
                     <input type="number" name="people_count" required min="1" value={formData.people_count} onChange={handleChange} 
                       className="w-full px-4 py-3 bg-gray-50 border border-transparent hover:bg-gray-100 focus:bg-white focus:border-gray-900 focus:ring-4 focus:ring-gray-900/10 rounded-2xl outline-none transition-all text-gray-900 font-medium placeholder-gray-400" 
                       placeholder="e.g. 50"
-                    />
-                  </div>
-                  <div className="relative group">
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 ml-1 group-focus-within:text-gray-900 transition-colors">Budget (₹)</label>
-                    <input type="number" name="budget_offered" required min="0" step="500" value={formData.budget_offered} onChange={handleChange} 
-                      className="w-full px-4 py-3 bg-gray-50 border border-transparent hover:bg-gray-100 focus:bg-white focus:border-gray-900 focus:ring-4 focus:ring-gray-900/10 rounded-2xl outline-none transition-all text-gray-900 font-medium placeholder-gray-400" 
-                      placeholder="e.g. 15000"
                     />
                   </div>
                 </div>

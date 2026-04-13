@@ -31,8 +31,8 @@ function App() {
       try {
         const data = await getCourses();
         setCourses(data);
-      } catch (error) {
-        console.error("Failed to load courses from API");
+      } catch (err) {
+        console.error("Failed to load courses from API", err);
       } finally {
         setLoading(false);
       }
