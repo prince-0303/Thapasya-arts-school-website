@@ -38,17 +38,24 @@ const Footer = () => {
           <div>
             <h4 className="font-serif text-xl font-medium mb-6">Contact Us</h4>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-white/80">
-                <MapPin className="w-5 h-5 text-yellow-100/70" />
-                <span className="font-light">123 Tradition Lane, Culture Hub</span>
+              <li className="flex items-start gap-3 text-white/80">
+                <MapPin className="w-5 h-5 text-yellow-100/70 mt-1 flex-shrink-0" />
+                <div className="flex flex-col gap-1">
+                  <span className="font-light">Bismillah Tower, Opp petrol pump main road, Kodavayoor</span>
+                  <span className="font-light">Navagraha Shopping Complex, New Bus Stand, Aalathur</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-white/80">
+                <Phone className="w-5 h-5 text-yellow-100/70 mt-1 flex-shrink-0" />
+                <div className="flex flex-col gap-1">
+                  <span className="font-light">+91 82817 47660</span>
+                  <span className="font-light">+91 70127 31518</span>
+                  <span className="font-light">+91 88480 7802</span>
+                </div>
               </li>
               <li className="flex items-center gap-3 text-white/80">
-                <Phone className="w-5 h-5 text-yellow-100/70" />
-                <span className="font-light">+91 (800) 123-4567</span>
-              </li>
-              <li className="flex items-center gap-3 text-white/80">
-                <Mail className="w-5 h-5 text-yellow-100/70" />
-                <span className="font-light">info@thapasyaarts.edu</span>
+                <Mail className="w-5 h-5 text-yellow-100/70 flex-shrink-0" />
+                <span className="font-light">thapasya.admin@gmail.com</span>
               </li>
             </ul>
           </div>

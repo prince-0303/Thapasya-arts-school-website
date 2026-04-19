@@ -1,5 +1,4 @@
 import React from 'react';
-import heroBg from '../assets/hero_bg.png';
 
 const Hero = () => {
   return (
@@ -10,7 +9,7 @@ const Hero = () => {
       {/* Background Image Container */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        style={{ backgroundImage: `url(${import.meta.env.VITE_S3_BASE_URL}/hero_bg.png)` }}
       />
       
       {/* Dark Red Gradient Overlay */}
